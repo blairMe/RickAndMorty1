@@ -1,5 +1,6 @@
 package bfa.blair.rickandmortyexample
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -28,15 +29,19 @@ class MainAdapter(val characterList : List<Character>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        TODO("Not yet implemented")
+        return MainViewHolder(RvCharactersBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        ))
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bindData(characterList[position])
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return characterList.size
     }
 
 //    inner class MainViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
