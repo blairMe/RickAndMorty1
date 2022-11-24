@@ -1,4 +1,7 @@
 package bfa.blair.rickandmortyexample
 
-class Repository {
+import bfa.blair.rickandmortyexample.network.ApiService
+
+class Repository(val apiService : ApiService) {
+    fun getCharacters(page : String) = apiService.fetchCharacters(page)
 }
