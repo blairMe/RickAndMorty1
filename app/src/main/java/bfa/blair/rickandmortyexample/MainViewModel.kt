@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import bfa.blair.rickandmortyexample.network.ApiClient
 import bfa.blair.rickandmortyexample.network.CharacterResponse
+import bfa.blair.rickandmortyexample.network.Character
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +29,7 @@ class MainViewModel(private val repository: Repository
                 call: Call<CharacterResponse>,
                 response: Response<CharacterResponse>,
             ) {
-                //_charactersLiveData.postValue(response.body()?.result)
+                _charactersLiveData.postValue(response.body()?.result)
             }
 
             override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {
