@@ -36,6 +36,8 @@ class MainViewModel(private val repository: Repository
                 Log.d("Failure", t.message.toString())
             }
 
+            // Comment
+
         })
     }
 }
