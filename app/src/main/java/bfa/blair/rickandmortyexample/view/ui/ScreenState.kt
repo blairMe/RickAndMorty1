@@ -1,4 +1,4 @@
-package bfa.blair.rickandmortyexample
+package bfa.blair.rickandmortyexample.view.ui
 
 sealed class ScreenState<T> (val data : T? = null, val message : String? = null) {
     class Success<T>(data: T) : ScreenState<T>(data)

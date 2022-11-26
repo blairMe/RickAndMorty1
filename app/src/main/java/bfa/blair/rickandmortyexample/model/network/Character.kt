@@ -1,4 +1,4 @@
-package bfa.blair.rickandmortyexample.network
+package bfa.blair.rickandmortyexample.model.network
 
 import com.squareup.moshi.Json
 
