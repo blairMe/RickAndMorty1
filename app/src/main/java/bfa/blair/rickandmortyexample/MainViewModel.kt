@@ -13,8 +13,8 @@ import retrofit2.Response
 
 class MainViewModel(private val repository: Repository
                         = Repository(ApiClient.apiService)) : ViewModel() {
-    private var _charactersLiveData = MutableLiveData<List<Character>>()
-    val characterLiveData : LiveData<List<Character>>
+    private var _charactersLiveData = MutableLiveData<ScreenState<List<Character>?>>()
+    val characterLiveData : LiveData<ScreenState<List<Character>?>>
 
     get() = _charactersLiveData
 
@@ -24,16 +24,23 @@ class MainViewModel(private val repository: Repository
 
     private fun fetchCharacter() {
         val client = repository.getCharacters("1")
+        _charactersLiveData.postValue(ScreenState.Loading(null))
         client.enqueue(object : Callback<CharacterResponse> {
             override fun onResponse(
                 call: Call<CharacterResponse>,
                 response: Response<CharacterResponse>,
             ) {
-                _charactersLiveData.postValue(response.body()?.result)
+                if(response.isSuccessful){
+                    _charactersLiveData.postValue(ScreenState.Success(response.body()?.result))
+                } else {
+                    _charactersLiveData.postValue(ScreenState.Error(response.code().toString(), null))
+                }
+
             }
 
             override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {
-                Log.d("Failure", t.message.toString())
+                // Log.d("Failure", t.message.toString())
+                _charactersLiveData.postValue(ScreenState.Error(t.message.toString(), null))
             }
 
         })
